@@ -28,13 +28,14 @@ message HelloManyLanguagesResponse{
   string hello_language = 1;
 }
 
-// message HellosGoodbyeRequest{
-//   Hello hello = 1;
-// }
+// client streaming
+message HellosGoodbyeRequest{
+  Hello hello = 1;
+}
 
-// message HellosGoodbyeResponse{
-//   string goodbye = 1;
-// }
+message HellosGoodbyeResponse{
+  string goodbye = 1;
+}
 
 // message GoodbyeRequest{
 //   Hello hello = 1;
@@ -52,9 +53,9 @@ service HelloService{
   // The service return hello/greeting in different languages
   rpc HelloManyLanguages(HelloManyLanguagesRequest) returns (stream HelloManyLanguagesResponse){};
 
-  // // Client streaming
-  // // Send many hellos and response with one goodbye for all people
-  // rpc HellosGoodbye(stream HellosGoodbyeRequest) returns (HellosGoodbyeResponse){};
+  // Client streaming
+  // Send many hellos and response with one goodbye for all people
+  rpc HellosGoodbye(stream HellosGoodbyeRequest) returns (HellosGoodbyeResponse){};
 
   // // bidirectional streaming
   // // It will send many hellos and the the server will response a goodbye by each one of them

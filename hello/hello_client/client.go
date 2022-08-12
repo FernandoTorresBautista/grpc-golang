@@ -6,6 +6,7 @@ import (
 	"grpc-course/hello/hellopb"
 	"io"
 	"log"
+	"time"
 
 	"google.golang.org/grpc"
 )
@@ -24,7 +25,8 @@ func main() {
 	c := hellopb.NewHelloServiceClient(cc)
 
 	// helloUnary(c)
-	helloServerStreaming(c)
+	// helloServerStreaming(c)
+	goodbyeClientStreaming(c)
 }
 
 func helloUnary(c hellopb.HelloServiceClient) {
@@ -72,4 +74,74 @@ func helloServerStreaming(c hellopb.HelloServiceClient) {
 		}
 		log.Printf("Res from HML: %v\n", msg.GetHelloLanguage())
 	}
+}
+
+func goodbyeClientStreaming(c hellopb.HelloServiceClient) {
+	fmt.Println("Starting goodbye function")
+
+	requests := []*hellopb.HellosGoodbyeRequest{
+		&hellopb.HellosGoodbyeRequest{
+			Hello: &hellopb.Hello{
+				FirstName: "FN_fake_0",
+				Prefix:    "00",
+			},
+		},
+		&hellopb.HellosGoodbyeRequest{
+			Hello: &hellopb.Hello{
+				FirstName: "FN_fake_1",
+				Prefix:    "01",
+			},
+		},
+		&hellopb.HellosGoodbyeRequest{
+			Hello: &hellopb.Hello{
+				FirstName: "FN_fake_2",
+				Prefix:    "02",
+			},
+		},
+		&hellopb.HellosGoodbyeRequest{
+			Hello: &hellopb.Hello{
+				FirstName: "FN_fake_3",
+				Prefix:    "03",
+			},
+		},
+		&hellopb.HellosGoodbyeRequest{
+			Hello: &hellopb.Hello{
+				FirstName: "FN_fake_4",
+				Prefix:    "04",
+			},
+		},
+		&hellopb.HellosGoodbyeRequest{
+			Hello: &hellopb.Hello{
+				FirstName: "FN_fake_5",
+				Prefix:    "05",
+			},
+		},
+		&hellopb.HellosGoodbyeRequest{
+			Hello: &hellopb.Hello{
+				FirstName: "FN_fake_6",
+				Prefix:    "06",
+			},
+		},
+	}
+
+	stream, err := c.HellosGoodbye(context.Background())
+
+	if err != nil {
+		log.Printf("Error calling goodbye %v", err)
+	}
+
+	for _, req := range requests {
+		fmt.Printf("Sending req: %v\n", req)
+
+		stream.Send(req)
+		time.Sleep(1000 * time.Millisecond)
+	}
+
+	goodbye, err := stream.CloseAndRecv()
+
+	if err != nil {
+		log.Printf("Error goodbye receive %v", err)
+	}
+
+	fmt.Println("Response server for client stream: ", goodbye)
 }

@@ -270,6 +270,101 @@ func (x *HelloManyLanguagesResponse) GetHelloLanguage() string {
 	return ""
 }
 
+// client streaming
+type HellosGoodbyeRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Hello *Hello `protobuf:"bytes,1,opt,name=hello,proto3" json:"hello,omitempty"`
+}
+
+func (x *HellosGoodbyeRequest) Reset() {
+	*x = HellosGoodbyeRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_hello_hellopb_hellopb_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *HellosGoodbyeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HellosGoodbyeRequest) ProtoMessage() {}
+
+func (x *HellosGoodbyeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_hello_hellopb_hellopb_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HellosGoodbyeRequest.ProtoReflect.Descriptor instead.
+func (*HellosGoodbyeRequest) Descriptor() ([]byte, []int) {
+	return file_hello_hellopb_hellopb_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *HellosGoodbyeRequest) GetHello() *Hello {
+	if x != nil {
+		return x.Hello
+	}
+	return nil
+}
+
+type HellosGoodbyeResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Goodbye string `protobuf:"bytes,1,opt,name=goodbye,proto3" json:"goodbye,omitempty"`
+}
+
+func (x *HellosGoodbyeResponse) Reset() {
+	*x = HellosGoodbyeResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_hello_hellopb_hellopb_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *HellosGoodbyeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HellosGoodbyeResponse) ProtoMessage() {}
+
+func (x *HellosGoodbyeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_hello_hellopb_hellopb_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HellosGoodbyeResponse.ProtoReflect.Descriptor instead.
+func (*HellosGoodbyeResponse) Descriptor() ([]byte, []int) {
+	return file_hello_hellopb_hellopb_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *HellosGoodbyeResponse) GetGoodbye() string {
+	if x != nil {
+		return x.Goodbye
+	}
+	return ""
+}
+
 var File_hello_hellopb_hellopb_proto protoreflect.FileDescriptor
 
 var file_hello_hellopb_hellopb_proto_rawDesc = []byte{
@@ -294,19 +389,30 @@ var file_hello_hellopb_hellopb_proto_rawDesc = []byte{
 	0x67, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x25, 0x0a, 0x0e, 0x68,
 	0x65, 0x6c, 0x6c, 0x6f, 0x5f, 0x6c, 0x61, 0x6e, 0x67, 0x75, 0x61, 0x67, 0x65, 0x18, 0x01, 0x20,
 	0x01, 0x28, 0x09, 0x52, 0x0d, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x4c, 0x61, 0x6e, 0x67, 0x75, 0x61,
-	0x67, 0x65, 0x32, 0xa3, 0x01, 0x0a, 0x0c, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x53, 0x65, 0x72, 0x76,
-	0x69, 0x63, 0x65, 0x12, 0x34, 0x0a, 0x05, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x12, 0x13, 0x2e, 0x68,
-	0x65, 0x6c, 0x6c, 0x6f, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x14, 0x2e, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x5d, 0x0a, 0x12, 0x48, 0x65, 0x6c,
-	0x6c, 0x6f, 0x4d, 0x61, 0x6e, 0x79, 0x4c, 0x61, 0x6e, 0x67, 0x75, 0x61, 0x67, 0x65, 0x73, 0x12,
-	0x20, 0x2e, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x4d, 0x61, 0x6e,
-	0x79, 0x4c, 0x61, 0x6e, 0x67, 0x75, 0x61, 0x67, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x21, 0x2e, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x4d,
-	0x61, 0x6e, 0x79, 0x4c, 0x61, 0x6e, 0x67, 0x75, 0x61, 0x67, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x30, 0x01, 0x42, 0x0f, 0x5a, 0x0d, 0x68, 0x65, 0x6c, 0x6c,
-	0x6f, 0x2f, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x67, 0x65, 0x22, 0x3a, 0x0a, 0x14, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x73, 0x47, 0x6f, 0x6f, 0x64,
+	0x62, 0x79, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x22, 0x0a, 0x05, 0x68, 0x65,
+	0x6c, 0x6c, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x68, 0x65, 0x6c, 0x6c,
+	0x6f, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x05, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x22, 0x31,
+	0x0a, 0x15, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x73, 0x47, 0x6f, 0x6f, 0x64, 0x62, 0x79, 0x65, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x67, 0x6f, 0x6f, 0x64, 0x62,
+	0x79, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x67, 0x6f, 0x6f, 0x64, 0x62, 0x79,
+	0x65, 0x32, 0xf3, 0x01, 0x0a, 0x0c, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x53, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x12, 0x34, 0x0a, 0x05, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x12, 0x13, 0x2e, 0x68, 0x65,
+	0x6c, 0x6c, 0x6f, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x14, 0x2e, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x5d, 0x0a, 0x12, 0x48, 0x65, 0x6c, 0x6c,
+	0x6f, 0x4d, 0x61, 0x6e, 0x79, 0x4c, 0x61, 0x6e, 0x67, 0x75, 0x61, 0x67, 0x65, 0x73, 0x12, 0x20,
+	0x2e, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x4d, 0x61, 0x6e, 0x79,
+	0x4c, 0x61, 0x6e, 0x67, 0x75, 0x61, 0x67, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x21, 0x2e, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x4d, 0x61,
+	0x6e, 0x79, 0x4c, 0x61, 0x6e, 0x67, 0x75, 0x61, 0x67, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x00, 0x30, 0x01, 0x12, 0x4e, 0x0a, 0x0d, 0x48, 0x65, 0x6c, 0x6c, 0x6f,
+	0x73, 0x47, 0x6f, 0x6f, 0x64, 0x62, 0x79, 0x65, 0x12, 0x1b, 0x2e, 0x68, 0x65, 0x6c, 0x6c, 0x6f,
+	0x2e, 0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x73, 0x47, 0x6f, 0x6f, 0x64, 0x62, 0x79, 0x65, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x2e, 0x48, 0x65,
+	0x6c, 0x6c, 0x6f, 0x73, 0x47, 0x6f, 0x6f, 0x64, 0x62, 0x79, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x00, 0x28, 0x01, 0x42, 0x0f, 0x5a, 0x0d, 0x68, 0x65, 0x6c, 0x6c, 0x6f,
+	0x2f, 0x68, 0x65, 0x6c, 0x6c, 0x6f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -321,26 +427,31 @@ func file_hello_hellopb_hellopb_proto_rawDescGZIP() []byte {
 	return file_hello_hellopb_hellopb_proto_rawDescData
 }
 
-var file_hello_hellopb_hellopb_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_hello_hellopb_hellopb_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_hello_hellopb_hellopb_proto_goTypes = []interface{}{
 	(*Hello)(nil),                      // 0: hello.Hello
 	(*HelloRequest)(nil),               // 1: hello.HelloRequest
 	(*HelloResponse)(nil),              // 2: hello.HelloResponse
 	(*HelloManyLanguagesRequest)(nil),  // 3: hello.HelloManyLanguagesRequest
 	(*HelloManyLanguagesResponse)(nil), // 4: hello.HelloManyLanguagesResponse
+	(*HellosGoodbyeRequest)(nil),       // 5: hello.HellosGoodbyeRequest
+	(*HellosGoodbyeResponse)(nil),      // 6: hello.HellosGoodbyeResponse
 }
 var file_hello_hellopb_hellopb_proto_depIdxs = []int32{
 	0, // 0: hello.HelloRequest.hello:type_name -> hello.Hello
 	0, // 1: hello.HelloManyLanguagesRequest.hello:type_name -> hello.Hello
-	1, // 2: hello.HelloService.Hello:input_type -> hello.HelloRequest
-	3, // 3: hello.HelloService.HelloManyLanguages:input_type -> hello.HelloManyLanguagesRequest
-	2, // 4: hello.HelloService.Hello:output_type -> hello.HelloResponse
-	4, // 5: hello.HelloService.HelloManyLanguages:output_type -> hello.HelloManyLanguagesResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	0, // 2: hello.HellosGoodbyeRequest.hello:type_name -> hello.Hello
+	1, // 3: hello.HelloService.Hello:input_type -> hello.HelloRequest
+	3, // 4: hello.HelloService.HelloManyLanguages:input_type -> hello.HelloManyLanguagesRequest
+	5, // 5: hello.HelloService.HellosGoodbye:input_type -> hello.HellosGoodbyeRequest
+	2, // 6: hello.HelloService.Hello:output_type -> hello.HelloResponse
+	4, // 7: hello.HelloService.HelloManyLanguages:output_type -> hello.HelloManyLanguagesResponse
+	6, // 8: hello.HelloService.HellosGoodbye:output_type -> hello.HellosGoodbyeResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_hello_hellopb_hellopb_proto_init() }
@@ -409,6 +520,30 @@ func file_hello_hellopb_hellopb_proto_init() {
 				return nil
 			}
 		}
+		file_hello_hellopb_hellopb_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*HellosGoodbyeRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_hello_hellopb_hellopb_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*HellosGoodbyeResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -416,7 +551,7 @@ func file_hello_hellopb_hellopb_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_hello_hellopb_hellopb_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -447,6 +582,9 @@ type HelloServiceClient interface {
 	// Server streaming
 	// The service return hello/greeting in different languages
 	HelloManyLanguages(ctx context.Context, in *HelloManyLanguagesRequest, opts ...grpc.CallOption) (HelloService_HelloManyLanguagesClient, error)
+	// Client streaming
+	// Send many hellos and response with one goodbye for all people
+	HellosGoodbye(ctx context.Context, opts ...grpc.CallOption) (HelloService_HellosGoodbyeClient, error)
 }
 
 type helloServiceClient struct {
@@ -498,6 +636,40 @@ func (x *helloServiceHelloManyLanguagesClient) Recv() (*HelloManyLanguagesRespon
 	return m, nil
 }
 
+func (c *helloServiceClient) HellosGoodbye(ctx context.Context, opts ...grpc.CallOption) (HelloService_HellosGoodbyeClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_HelloService_serviceDesc.Streams[1], "/hello.HelloService/HellosGoodbye", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &helloServiceHellosGoodbyeClient{stream}
+	return x, nil
+}
+
+type HelloService_HellosGoodbyeClient interface {
+	Send(*HellosGoodbyeRequest) error
+	CloseAndRecv() (*HellosGoodbyeResponse, error)
+	grpc.ClientStream
+}
+
+type helloServiceHellosGoodbyeClient struct {
+	grpc.ClientStream
+}
+
+func (x *helloServiceHellosGoodbyeClient) Send(m *HellosGoodbyeRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *helloServiceHellosGoodbyeClient) CloseAndRecv() (*HellosGoodbyeResponse, error) {
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	m := new(HellosGoodbyeResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // HelloServiceServer is the server API for HelloService service.
 type HelloServiceServer interface {
 	// Unary
@@ -505,6 +677,9 @@ type HelloServiceServer interface {
 	// Server streaming
 	// The service return hello/greeting in different languages
 	HelloManyLanguages(*HelloManyLanguagesRequest, HelloService_HelloManyLanguagesServer) error
+	// Client streaming
+	// Send many hellos and response with one goodbye for all people
+	HellosGoodbye(HelloService_HellosGoodbyeServer) error
 }
 
 // UnimplementedHelloServiceServer can be embedded to have forward compatible implementations.
@@ -516,6 +691,9 @@ func (*UnimplementedHelloServiceServer) Hello(context.Context, *HelloRequest) (*
 }
 func (*UnimplementedHelloServiceServer) HelloManyLanguages(*HelloManyLanguagesRequest, HelloService_HelloManyLanguagesServer) error {
 	return status.Errorf(codes.Unimplemented, "method HelloManyLanguages not implemented")
+}
+func (*UnimplementedHelloServiceServer) HellosGoodbye(HelloService_HellosGoodbyeServer) error {
+	return status.Errorf(codes.Unimplemented, "method HellosGoodbye not implemented")
 }
 
 func RegisterHelloServiceServer(s *grpc.Server, srv HelloServiceServer) {
@@ -561,6 +739,32 @@ func (x *helloServiceHelloManyLanguagesServer) Send(m *HelloManyLanguagesRespons
 	return x.ServerStream.SendMsg(m)
 }
 
+func _HelloService_HellosGoodbye_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(HelloServiceServer).HellosGoodbye(&helloServiceHellosGoodbyeServer{stream})
+}
+
+type HelloService_HellosGoodbyeServer interface {
+	SendAndClose(*HellosGoodbyeResponse) error
+	Recv() (*HellosGoodbyeRequest, error)
+	grpc.ServerStream
+}
+
+type helloServiceHellosGoodbyeServer struct {
+	grpc.ServerStream
+}
+
+func (x *helloServiceHellosGoodbyeServer) SendAndClose(m *HellosGoodbyeResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *helloServiceHellosGoodbyeServer) Recv() (*HellosGoodbyeRequest, error) {
+	m := new(HellosGoodbyeRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 var _HelloService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "hello.HelloService",
 	HandlerType: (*HelloServiceServer)(nil),
@@ -575,6 +779,11 @@ var _HelloService_serviceDesc = grpc.ServiceDesc{
 			StreamName:    "HelloManyLanguages",
 			Handler:       _HelloService_HelloManyLanguages_Handler,
 			ServerStreams: true,
+		},
+		{
+			StreamName:    "HellosGoodbye",
+			Handler:       _HelloService_HellosGoodbye_Handler,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "hello/hellopb/hellopb.proto",
