@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"time"
 
 	"grpc-course/hello/hellopb"
 
@@ -13,6 +14,7 @@ import (
 
 type server struct{}
 
+// hello service unary
 func (*server) Hello(ctx context.Context, req *hellopb.HelloRequest) (*hellopb.HelloResponse, error) {
 	fmt.Printf("Hello function was invoked with %v\n", req)
 
@@ -26,6 +28,29 @@ func (*server) Hello(ctx context.Context, req *hellopb.HelloRequest) (*hellopb.H
 	}
 
 	return res, nil
+}
+
+// hello server streaming
+func (*server) HelloManyLanguages(req *hellopb.HelloManyLanguagesRequest, stream hellopb.HelloService_HelloManyLanguagesServer) error {
+	fmt.Printf("Hello Many times function was invoked with %v\n", req)
+
+	langs := [10]string{"Salut! ", "Hello! ", "Ni hao! ", "Alô! ", "Privyét! ", "Schalom! ", "Hola ! ", "Yassou! ", "Hej! ", "Konnichiwa! "}
+
+	firstName := req.GetHello().GetFirstName()
+	prefix := req.GetHello().GetPrefix()
+
+	for _, helloLang := range langs {
+		helloLanguage := helloLang + prefix + " " + firstName
+
+		res := &hellopb.HelloManyLanguagesResponse{
+			HelloLanguage: helloLanguage,
+		}
+		// send the response for the actual language
+		stream.Send(res)
+		time.Sleep(1000 * time.Millisecond) // one second
+	}
+
+	return nil
 }
 
 func main() {

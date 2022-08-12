@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"grpc-course/hello/hellopb"
+	"io"
 	"log"
 
 	"google.golang.org/grpc"
@@ -22,7 +23,8 @@ func main() {
 
 	c := hellopb.NewHelloServiceClient(cc)
 
-	helloUnary(c)
+	// helloUnary(c)
+	helloServerStreaming(c)
 }
 
 func helloUnary(c hellopb.HelloServiceClient) {
@@ -42,4 +44,32 @@ func helloUnary(c hellopb.HelloServiceClient) {
 	}
 
 	log.Printf("Response Hello: %v", res.CustomHello)
+}
+
+func helloServerStreaming(c hellopb.HelloServiceClient) {
+	fmt.Println("Starting server streaming RPC Hello")
+
+	req := &hellopb.HelloManyLanguagesRequest{
+		Hello: &hellopb.Hello{
+			FirstName: "FirstName_fake",
+			Prefix:    "Prefix_fake",
+		},
+	}
+
+	restStream, err := c.HelloManyLanguages(context.Background(), req)
+
+	if err != nil {
+		log.Printf("Error calling Hello Many languages %v", err)
+	}
+
+	for {
+		msg, err := restStream.Recv()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatalf("Error reading stream %v", err)
+		}
+		log.Printf("Res from HML: %v\n", msg.GetHelloLanguage())
+	}
 }
