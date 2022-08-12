@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package proto;
+
+import "proto/robot.proto";
+
+option optimize_for = CODE_SIZE;
+option java_package = "com.cibers.robot";
+option java_outler_classname = "MyProto";
+
+// las asignaciones tienen un tag al serializar
+// 1, 2, 3... n variables del message
+message FigthRequest {
+    robot.Robot opponent_one = 1;
+    robot.Robot opponent_two = 2;
+    // seconds 
+    int32 duration = 3; 
+    // it means figth will affect the player ranking or not 
+    bool is_ranked = 4;
+    // it is the song of the figth 
+    bytes song = 5;
+    robot.SCENARIO scenario = 6; 
+}
+
+message FigthResponse {
+    robot.Robot opponent1 = 1; 
+    robot.Robot opponent2 = 2; 
+    robot.Robot winner = 3; 
+}
+
+service RobotService {
+    rpc Figth (FigthRequest) returns (FigthResponse);
+}

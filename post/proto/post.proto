@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package post;
+
+message Post {
+    // Titulo
+    string titulo = 1;
+    // Body del post
+    string body = 2;
+    // Número de likes
+    int32 likes = 3;
+    // imagen (binary)
+    bytes imagen = 4;
+    // Información del autor, su id y su nombre
+    Autor autor = 5;
+
+    message Autor {
+        string id = 1;
+        string nombre = 2;
+    }
+
+    // Un indicador de si es un post premium o no
+    bool premium = 6;
+}

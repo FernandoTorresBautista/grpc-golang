@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package robot;
+
+message Robot {
+    // reserved se usa cuando no hay un consumidor 
+    // que no debe usar esos campos 
+    reserved 5, 6; // reserved for unique keys 
+    reserved "laser", "agile"; // for names of the fields
+
+    string id = 1;
+    // custom unique name
+    string name = 2;
+    // repeated array de strings 
+    repeated string powers = 3; // laser, agile 
+
+    // it is the robot's speed and it reflected by their attacks or powers 
+    // deprecated and should use the attribute repeated powers
+    int32 speed_level = 10 [deprecated = true];
+
+    Helper helper = 11;
+    // it is a robot helper who figths in hand to hand with its owner
+    message Helper {
+        string id = 1;
+        string nombre = 2;
+    }
+}
+
+// it is the scenario where the figth will take place 
+enum SCENARIO {
+    CITY = 0;
+    SPACE = 1;
+    MALL = 2;
+}
