@@ -26,7 +26,8 @@ func main() {
 
 	// helloUnary(c)
 	// helloServerStreaming(c)
-	goodbyeClientStreaming(c)
+	// goodbyeClientStreaming(c)
+	goodbyeBidiStreaming(c)
 }
 
 func helloUnary(c hellopb.HelloServiceClient) {
@@ -144,4 +145,87 @@ func goodbyeClientStreaming(c hellopb.HelloServiceClient) {
 	}
 
 	fmt.Println("Response server for client stream: ", goodbye)
+}
+
+func goodbyeBidiStreaming(c hellopb.HelloServiceClient) {
+	fmt.Println("Starting goodbye bidi function")
+
+	// create stream to call server
+	stream, err := c.Goodbye(context.Background())
+	requests := []*hellopb.GoodbyeRequest{
+		&hellopb.GoodbyeRequest{
+			Hello: &hellopb.Hello{
+				FirstName: "FN_fake_0",
+				Prefix:    "00",
+			},
+		},
+		&hellopb.GoodbyeRequest{
+			Hello: &hellopb.Hello{
+				FirstName: "FN_fake_1",
+				Prefix:    "01",
+			},
+		},
+		&hellopb.GoodbyeRequest{
+			Hello: &hellopb.Hello{
+				FirstName: "FN_fake_2",
+				Prefix:    "02",
+			},
+		},
+		&hellopb.GoodbyeRequest{
+			Hello: &hellopb.Hello{
+				FirstName: "FN_fake_3",
+				Prefix:    "03",
+			},
+		},
+		&hellopb.GoodbyeRequest{
+			Hello: &hellopb.Hello{
+				FirstName: "FN_fake_4",
+				Prefix:    "04",
+			},
+		},
+		&hellopb.GoodbyeRequest{
+			Hello: &hellopb.Hello{
+				FirstName: "FN_fake_5",
+				Prefix:    "05",
+			},
+		},
+		&hellopb.GoodbyeRequest{
+			Hello: &hellopb.Hello{
+				FirstName: "FN_fake_6",
+				Prefix:    "06",
+			},
+		},
+	}
+	if err != nil {
+		log.Printf("Error creating stream %v", err)
+	}
+
+	waitc := make(chan struct{})
+	// send many messages to the server (go routines)
+	go func() {
+		for _, req := range requests {
+			log.Printf("Seending message %v", req)
+			stream.Send(req)
+			time.Sleep(1000 * time.Millisecond)
+		}
+		stream.CloseSend()
+	}()
+	// receive messages from the server (go routines)
+	go func() {
+		for {
+			res, err := stream.Recv()
+
+			if err == io.EOF {
+				break
+			}
+			if err != nil {
+				log.Printf("Error receiving stream %v", err)
+				break
+			}
+			fmt.Printf("Response on gorutine: %v\n", res.GetGoodbye())
+		}
+		close(waitc)
+	}()
+	//block when everthing is completed or closed
+	<-waitc
 }
