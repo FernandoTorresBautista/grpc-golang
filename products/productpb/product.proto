@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package product;
+
+option go_package ="products/productpb";
+
+message Product{
+  string id = 1;
+  string name = 2;
+  double price = 3;
+}
+
+// CreateProduct
+message CreateProductRequest{
+  Product product = 1;
+}
+message CreateProductResponse{
+  Product product = 1;
+}
+
+// GetProduct
+message GetProductRequest{
+  string product_id = 1;
+}
+message GetProductResponse { 
+  Product product = 1; 
+}
+
+// UpdateProduct
+message UpdateProductRequest {
+  Product product = 1; 
+}
+message UpdateProductResponse {
+  Product product = 1; 
+}
+
+// DeleteProduct
+message DeleteProductRequest { 
+  string product_id = 1; 
+}
+message DeleteProductResponse { 
+  string product_id = 1; 
+}
+
+// ListProduct
+message ListProductRequest{
+  // There is not attributes becase we do not use filters for products
+}
+message ListProductResponse { 
+  Product product = 1; // other option without stream is repetead Product products = 1; to return an array
+}
+
+service ProductService {
+  // Create a new product
+  rpc CreateProduct (CreateProductRequest) returns (CreateProductResponse);
+  
+  // Get specific product by id
+  rpc GetProduct(GetProductRequest) returns (GetProductResponse);
+  
+  // Updates the product
+  rpc UpdateProduct(UpdateProductRequest)returns (UpdateProductResponse);
+  
+  //Delete a product by id
+  rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
+  
+  // Instead of return an array or list, we use a stream to make it more fun
+  rpc ListProduct(ListProductRequest) returns (stream ListProductResponse);
+}
